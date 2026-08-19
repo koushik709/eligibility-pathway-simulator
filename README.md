@@ -41,3 +41,25 @@ The platform dynamically collects applicant information and evaluates the profil
                      │
                      ▼
                   MySQL
+
+## 📁 Project Structure
+
+eligibility-pathway-simulator/
+│
+├── backend/              # Laravel REST API
+│   ├── app/
+│   ├── bootstrap/
+│   ├── config/
+│   ├── database/
+│   └── routes/
+│
+├── frontend/             # Next.js application
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── .gitignore
+└── README.md
+
+---
+
