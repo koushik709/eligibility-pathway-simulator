@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-mist text-ink font-body antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0E2A3D;
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Perforated tear-line, like the stub edge of a boarding pass / visa stamp. */
+  .tear-edge {
+    background-image: radial-gradient(circle, #EEF2F1 3px, transparent 3.5px);
+    background-size: 14px 14px;
+    background-position: left center;
+    background-repeat: repeat-x;
+  }
+
+  .tear-edge-v {
+    background-image: radial-gradient(circle, #EEF2F1 3px, transparent 3.5px);
+    background-size: 14px 14px;
+    background-position: top center;
+    background-repeat: repeat-y;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
