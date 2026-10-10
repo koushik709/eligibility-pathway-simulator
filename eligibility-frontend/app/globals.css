@@ -3,31 +3,43 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-mist text-ink font-body antialiased;
+  html {
+    scroll-behavior: smooth;
   }
 
-  h1, h2, h3 {
+  body {
+    @apply min-h-screen bg-mist font-body text-ink antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.8), transparent 35%),
+      linear-gradient(180deg, #edf4f2 0%, #eef2f1 100%);
+  }
+
+  h1,
+  h2,
+  h3 {
     @apply font-display;
   }
 
+  ::selection {
+    background: rgba(179, 63, 46, 0.18);
+  }
+
   :focus-visible {
-    outline: 2px solid #0E2A3D;
+    outline: 2px solid #0e2a3d;
     outline-offset: 2px;
   }
 }
 
 @layer utilities {
-  /* Perforated tear-line, like the stub edge of a boarding pass / visa stamp. */
   .tear-edge {
-    background-image: radial-gradient(circle, #EEF2F1 3px, transparent 3.5px);
+    background-image: radial-gradient(circle, #edf1ee 3px, transparent 3.5px);
     background-size: 14px 14px;
     background-position: left center;
     background-repeat: repeat-x;
   }
 
   .tear-edge-v {
-    background-image: radial-gradient(circle, #EEF2F1 3px, transparent 3.5px);
+    background-image: radial-gradient(circle, #edf1ee 3px, transparent 3.5px);
     background-size: 14px 14px;
     background-position: top center;
     background-repeat: repeat-y;
@@ -39,5 +51,6 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -9,36 +9,47 @@ interface QuestionStepProps {
 export default function QuestionStep({ question, value, onChange }: QuestionStepProps) {
   return (
     <div>
-      <h2 className="mb-6 max-w-lg font-display text-2xl leading-snug text-ink sm:text-3xl">
+      <div className="mb-6 flex items-center justify-between gap-3">
+        <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-ink-soft">Question</p>
+        <span className="rounded-full border border-line bg-white px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-ink-soft">
+          {question.type}
+        </span>
+      </div>
+
+      <h2 className="mb-7 max-w-xl font-display text-2xl leading-snug text-ink sm:text-3xl">
         {question.label}
       </h2>
 
       {question.type === 'number' && (
-        <input
-          type="number"
-          autoFocus
-          min={question.min}
-          max={question.max}
-          value={typeof value === 'number' ? value : ''}
-          onChange={(e) => onChange(e.target.value === '' ? '' : Number(e.target.value))}
-          className="w-40 border-b-2 border-line bg-transparent px-1 py-2 font-mono text-3xl text-ink outline-none focus:border-stamp"
-          placeholder="0"
-        />
+        <div className="max-w-xs rounded-[26px] border border-line bg-white p-4 shadow-[0_18px_50px_rgba(14,42,61,0.04)]">
+          <input
+            type="number"
+            autoFocus
+            min={question.min}
+            max={question.max}
+            value={typeof value === 'number' ? value : ''}
+            onChange={(e) => onChange(e.target.value === '' ? '' : Number(e.target.value))}
+            className="w-full border-b border-line bg-transparent px-1 pb-2 font-mono text-4xl text-ink outline-none transition-colors focus:border-stamp"
+            placeholder="0"
+          />
+        </div>
       )}
 
       {question.type === 'text' && (
-        <input
-          type="text"
-          autoFocus
-          value={typeof value === 'string' ? value : ''}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full max-w-sm border-b-2 border-line bg-transparent px-1 py-2 text-xl text-ink outline-none focus:border-stamp"
-          placeholder="Type your answer"
-        />
+        <div className="max-w-xl rounded-[26px] border border-line bg-white p-4 shadow-[0_18px_50px_rgba(14,42,61,0.04)]">
+          <input
+            type="text"
+            autoFocus
+            value={typeof value === 'string' ? value : ''}
+            onChange={(e) => onChange(e.target.value)}
+            className="w-full border-b border-line bg-transparent px-1 pb-2 text-lg text-ink outline-none transition-colors focus:border-stamp"
+            placeholder="Type your answer"
+          />
+        </div>
       )}
 
       {question.type === 'select' && (
-        <div className="flex flex-col gap-2">
+        <div className="grid gap-3">
           {question.options?.map((option) => {
             const selected = String(value) === option.value;
             return (
@@ -46,20 +57,20 @@ export default function QuestionStep({ question, value, onChange }: QuestionStep
                 key={option.value}
                 type="button"
                 onClick={() => onChange(option.value)}
-                className={`flex items-center gap-3 border px-4 py-3 text-left transition-colors ${
+                className={`flex items-center gap-3 rounded-[22px] border px-4 py-3.5 text-left transition-all duration-200 ${
                   selected
-                    ? 'border-stamp bg-stamp/5 text-ink'
-                    : 'border-line text-ink-soft hover:border-ink-soft'
+                    ? 'border-stamp bg-stamp/5 text-ink shadow-[0_12px_24px_rgba(179,63,46,0.08)]'
+                    : 'border-line bg-white text-ink-soft hover:border-ink-soft hover:bg-[#f8faf9]'
                 }`}
               >
                 <span
-                  className={`flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border-2 ${
-                    selected ? 'border-stamp' : 'border-line'
+                  className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 ${
+                    selected ? 'border-stamp bg-stamp/10' : 'border-line bg-transparent'
                   }`}
                 >
-                  {selected && <span className="h-2 w-2 rounded-full bg-stamp" />}
+                  {selected && <span className="h-2.5 w-2.5 rounded-full bg-stamp" />}
                 </span>
-                {option.label}
+                <span className="text-base leading-6">{option.label}</span>
               </button>
             );
           })}
@@ -67,7 +78,7 @@ export default function QuestionStep({ question, value, onChange }: QuestionStep
       )}
 
       {question.type === 'boolean' && (
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           {[
             { label: 'Yes', val: true },
             { label: 'No', val: false },
@@ -78,10 +89,10 @@ export default function QuestionStep({ question, value, onChange }: QuestionStep
                 key={opt.label}
                 type="button"
                 onClick={() => onChange(opt.val)}
-                className={`border-2 px-8 py-3 font-display text-sm uppercase tracking-wide transition-colors ${
+                className={`rounded-full border px-8 py-3 font-display text-sm uppercase tracking-[0.12em] transition-all duration-200 ${
                   selected
-                    ? 'border-stamp bg-stamp text-paper'
-                    : 'border-line text-ink-soft hover:border-ink-soft'
+                    ? 'border-stamp bg-stamp text-white shadow-[0_16px_30px_rgba(179,63,46,0.25)]'
+                    : 'border-line bg-white text-ink-soft hover:border-ink-soft hover:bg-[#f8faf9]'
                 }`}
               >
                 {opt.label}
